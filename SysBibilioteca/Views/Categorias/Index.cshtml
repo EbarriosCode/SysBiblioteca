@@ -1,0 +1,107 @@
+﻿@model List<Categoria>
+    @{
+        ViewData["Title"] = "Categorias";
+    }
+
+    <br /><br /><br /><br /><br />
+    <button data-toggle="modal" data-target="#createModal" class="btn btn-info">Crear <i class="glyphicon glyphicon-plus"></i></button>
+
+    <br />
+    <h2 class="text-center">Categorias</h2>
+
+    @if (TempData["created"] != null)
+    {
+        <div class="alert alert-success alert-dismissible fade in col-md-6 col-md-offset-3 text-center">
+            <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+            <strong>@TempData["created"]</strong>
+        </div>
+    }
+
+    @if (TempData["edited"] != null)
+    {
+        <div class="alert alert-success alert-dismissible fade in col-md-6 col-md-offset-3 text-center">
+            <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+            <strong>@TempData["edited"]</strong>
+        </div>
+    }
+
+    <table class="table">
+        <thead>
+            <tr class="active">
+                <th class="text-center">Categoria</th>
+                <th class="text-center">Editar</th>
+                <th class="text-center">Eliminar</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var categoria in Model)
+            {
+                <tr>
+                    <td class="text-center">@categoria.Nombre</td>
+                    <td class="text-center"><a data-toggle="modal" data-target="#editModal" onclick="CargarDatos(@categoria.CategoriaId,'@categoria.Nombre')" class="btn btn-success"><i class="glyphicon glyphicon-pencil"></i></a></td>
+                    <td class="text-center"><a onclick="confirmarDelete(@categoria.CategoriaId)" class="btn btn-danger"><i class="glyphicon glyphicon-trash"></i></a></td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+    <!-- Modal Create -->
+    <div class="modal fade" id="createModal" role="dialog">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h2 class="modal-title text-center">Crear</h2>
+                </div>
+                <div class="modal-body">
+                    <form asp-controller="Categorias" asp-action="Create">
+                        <div class="form-group">
+                            <label>Categoria</label>
+                            <input type="text" name="categoria" class="form-control">
+                        </div>
+                        <input type="submit" class="btn btn-warning" value="Crear" />
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal Edit -->
+    <div class="modal fade" id="editModal" role="dialog">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h2 class="modal-title text-center">Editar</h2>
+                </div>
+                <div class="modal-body">
+                    <form asp-controller="Categorias" asp-action="Edit">
+
+                        <input type="hidden" id="idEdit" name="idEdit" />
+
+                        <div class="form-group">
+                            <label>Autor</label>
+                            <input type="text" id="categoriaEdit" name="categoriaEdit" class="form-control">
+                        </div>
+                        <input type="submit" class="btn btn-success" value="Editar" />
+                    </form>
+                </div>
+            </div>
+        </div> bn
+    </div>
+
+
+    <script>
+    function CargarDatos(id, nombre) {
+        $("#idEdit").val(id);
+        $("#categoriaEdit").val(nombre);
+    }
+
+    function confirmarDelete(idDelete) {
+
+        if (window.confirm("Esta seguro que desea eliminar este registro? ") == true) {
+            window.location.href = "Categorias/Delete?id=" + idDelete;
+        }
+    }
+    </script>
+

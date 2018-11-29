@@ -1,0 +1,106 @@
+﻿@model IEnumerable<Donacion>
+@{
+    ViewData["Title"] = "Donaciones";
+}
+
+<h2 class="text-center">Donaciones</h2>
+<p>
+    <br />
+    <button data-toggle="modal" data-target="#createModal" class="btn btn-info">Crear <i class="glyphicon glyphicon-plus"></i></button>
+</p>
+<br />
+
+@if (TempData["created"] != null)
+{
+    <div class="alert alert-success alert-dismissible fade in col-md-6 col-md-offset-3 text-center">
+        <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+        <strong>@TempData["created"]</strong>
+    </div>
+}
+
+@if (TempData["edited"] != null)
+{
+    <div class="alert alert-success alert-dismissible fade in col-md-6 col-md-offset-3 text-center">
+        <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+        <strong>@TempData["edited"]</strong>
+    </div>
+}
+
+<table class="table">
+    <thead>
+        <tr class="active">
+            <th>
+                @Html.DisplayNameFor(model => model.Cantidad)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Libro)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Donador)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Cantidad)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Libro.Titulo)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Donador.Nombre)
+                </td>
+
+                <td>                    
+                    <a onclick="confirmarDelete(@item.DonacionId)" class="btn btn-danger"><i class="glyphicon glyphicon-trash"></i></a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<!-- Modal Create -->
+<div class="modal fade" id="createModal" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h2 class="modal-title text-center">Crear</h2>
+            </div>
+            <div class="modal-body">
+                <form asp-controller="Donaciones" asp-action="Create">
+                    <div class="form-group">
+                        <label>Cantidad</label>
+                        <input type="number" name="Cantidad" class="form-control">
+                    </div>
+
+                    <div class="form-group">
+                        <label class="control-label">Libro</label>
+                        <select name="LibroId" class="form-control" asp-items="ViewBag.LibroId"></select>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="control-label">Donador</label>
+                        <select name="DonadorId" class="form-control" asp-items="ViewBag.DonadorId"></select>
+                    </div>
+                    <input type="submit" class="btn btn-warning" value="Crear" />
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>    
+    function confirmarDelete(idDelete) {
+
+        if (window.confirm("Esta seguro que desea eliminar este registro? ") == true) {
+            window.location.href = "Donaciones/Delete?id=" + idDelete;
+        }
+    }
+</script>
+
+

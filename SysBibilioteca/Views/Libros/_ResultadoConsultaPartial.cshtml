@@ -1,0 +1,64 @@
+﻿@model Libro
+
+<div>
+    <h4 class="text-center">Datos del Libro Encontrado</h4>
+    
+    <dl class="dl-horizontal col-md-6 col-md-offset-3">
+        <dt>
+            @Html.DisplayNameFor(model => model.Codigo)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Codigo)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Titulo)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Titulo)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Paginas)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Paginas)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Descripcion)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Descripcion)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Ejemplares)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Ejemplares)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Autor)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Autor.Nombre)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Categoria)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Categoria.Nombre)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Editorial)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Editorial.Nombre)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Ubicacion)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Ubicacion.Nombre)
+        </dd>
+    </dl>
+</div>
+
+<br /><br /><br /><br /><br /><br /><br /><br /><br />

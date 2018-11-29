@@ -1,0 +1,72 @@
+﻿@model SysBibilioteca.Models.Libro
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h2 class="text-center">Detalles</h2>
+
+<div>
+    <h4 class="text-center">Libro</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Codigo)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Codigo)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Titulo)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Titulo)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Paginas)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Paginas)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Descripcion)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Descripcion)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Ejemplares)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Ejemplares)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Autor)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Autor.Nombre)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Categoria)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Categoria.Nombre)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Editorial)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Editorial.Nombre)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Ubicacion)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Ubicacion.Nombre)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model.LibroId" class="btn btn-success">Editar</a>
+    <a asp-action="Index" class="btn btn-default">Regresar al Listado de Libros</a>
+</div>

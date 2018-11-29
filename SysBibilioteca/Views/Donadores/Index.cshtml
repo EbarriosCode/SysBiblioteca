@@ -1,0 +1,129 @@
+﻿@model IEnumerable<SysBibilioteca.Models.Donador>
+
+@{
+    ViewData["Title"] = "Donadores";
+}
+
+<br /><br /><br /><br /><br />
+<button data-toggle="modal" data-target="#createModal" class="btn btn-info">Crear <i class="glyphicon glyphicon-plus"></i></button>
+
+<h2 class="text-center">Donadores</h2>
+<br />
+@if (TempData["created"] != null)
+{
+    <div class="alert alert-success alert-dismissible fade in col-md-6 col-md-offset-3 text-center">
+        <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+        <strong>@TempData["created"]</strong>
+    </div>
+}
+
+@if (TempData["edited"] != null)
+{
+    <div class="alert alert-info alert-dismissible fade in col-md-6 col-md-offset-3 text-center">
+        <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+        <strong>@TempData["edited"]</strong>
+    </div>
+}
+
+<table class="table">
+    <thead>
+        <tr class="active">
+            <th class="text-center">Nombre</th>
+            <th class="text-center">Teléfono</th>
+            <th class="text-center">Dirección</th>
+            <th class="text-center" colspan="2">Opciones</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+        <tr>
+            <td class="text-center">@item.Nombre</td>
+            <td class="text-center">@item.Telefono</td>
+            <td class="text-center">@item.Direccion</td>
+            <td class="text-center"><a data-toggle="modal" data-target="#editModal" onclick="CargarDatos(@item.DonadorId,'@item.Nombre','@item.Telefono','@item.Direccion')" class="btn btn-success"><i class="glyphicon glyphicon-pencil"></i></a></td>
+            <td class="text-center"><a onclick="confirmarDelete(@item.DonadorId)" class="btn btn-danger"><i class="glyphicon glyphicon-trash"></i></a></td>
+        </tr>
+        }
+    </tbody>
+</table>
+
+<!-- Modal Create -->
+<div class="modal fade" id="createModal" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h2 class="modal-title text-center">Crear</h2>
+            </div>
+            <div class="modal-body">
+                <form asp-controller="Donadores" asp-action="Create">
+                    <div class="form-group">
+                        <label>Nombre</label>
+                        <input type="text" name="Nombre" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <label>Teléfono</label>
+                        <input type="text" name="Telefono" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <label>Dirección</label>
+                        <input type="text" name="Direccion" class="form-control">
+                    </div>
+                    <input type="submit" class="btn btn-warning" value="Crear" />
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal Edit -->
+<div class="modal fade" id="editModal" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h2 class="modal-title text-center">Editar</h2>
+            </div>
+            <div class="modal-body">
+                <form asp-controller="Donadores" asp-action="Edit">
+
+                    <input type="hidden" id="idEdit" name="idEdit" />
+
+                    <div class="form-group">
+                        <label>Nombre</label>
+                        <input type="text" id="NombreEdit" name="NombreEdit" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <label>Teléfono</label>
+                        <input type="text" id="TelefonoEdit" name="TelefonoEdit" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <label>Dirección</label>
+                        <input type="text" id="DireccionEdit" name="DireccionEdit" class="form-control">
+                    </div>
+                    <input type="submit" class="btn btn-success" value="Editar" />
+                </form>
+            </div>
+        </div>
+    </div> bn
+</div>
+
+
+<script>
+    function CargarDatos(id, nombre, telefono, direccion) {
+        $("#idEdit").val(id);
+        $("#NombreEdit").val(nombre);
+        $("#TelefonoEdit").val(telefono);
+        $("#DireccionEdit").val(direccion);
+    }
+
+    function confirmarDelete(idDelete) {
+
+        if (window.confirm("Esta seguro que desea eliminar este registro? ") == true) {
+            window.location.href = "Donadores/Delete?id=" + idDelete;
+        }
+    }
+</script>
+
+

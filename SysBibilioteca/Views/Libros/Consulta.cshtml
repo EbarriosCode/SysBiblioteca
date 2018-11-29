@@ -1,0 +1,53 @@
+﻿@{
+    ViewData["Title"] = "Consulta de Libros";
+}
+
+<br />
+<h1 class="text-center">Consulta de Libros</h1>
+<hr />
+<div class="row">
+    <div class="col-md-6 col-md-offset-3">
+
+        
+            <div class="form-group">
+                <label>Buscar</label>
+                <input type="text" id="Search" class="form-control">
+            </div>
+            <input type="button" onclick="searchAjax()" class="btn btn-default" value="Buscar" />
+        
+
+    </div>
+</div>
+
+<div id="dvResponse">
+
+</div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.js"></script>
+<script>
+    
+    function searchAjax()
+    {
+        var Search = $("#Search").val();
+        
+        $("#dvResponse").empty();
+
+        $.ajax({
+            //beforeSend: function () {
+            //    $("#divLoading").append("<img src='../images/loading.gif' id='loading' style='width:100px; height:100px; display:block; margin:auto;' />");
+            //},
+            //complete: function () {
+            //    $("#loading").remove();
+            //},
+            cache: false,
+            dataType: 'text',
+            type: "GET",
+            url: "/Libros/ConsultaAjax?Search=" + Search,
+            error: function (xhr, ajaxOptions, thrownError) {
+                alert('Failed');
+            }
+        }).done(function (response) {
+            //console.log(response)
+            $("#dvResponse").append(response);
+        });
+    }
+</script>
