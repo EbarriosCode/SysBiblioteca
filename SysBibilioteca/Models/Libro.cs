@@ -30,5 +30,8 @@ namespace SysBibilioteca.Models
 
         public int UbicacionId { get; set; }
         public Ubicacion Ubicacion { get; set; }
+
+        public IEnumerable<Prestamo> Prestamos { get; set; }
+        public IEnumerable<Devolucion> Devoluciones { get; set; }
     }
 }

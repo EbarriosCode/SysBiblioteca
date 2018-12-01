@@ -47,6 +47,8 @@ namespace SysBibilioteca
             services.AddTransient<IDonadorService, DonadorService>();
             services.AddTransient<IDonacionService, DonacionService>();
             services.AddTransient<ILectorService, LectorService>();
+            services.AddTransient<IPrestamoService, PrestamoService>();
+            services.AddTransient<IDevolucionService, DevolucionService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -151,6 +153,29 @@ namespace SysBibilioteca
                 {
                     new Sexo { Nombre = "Masculino" },
                     new Sexo { Nombre = "Femenino" }
+                });
+
+                _context.SaveChanges();
+            }
+
+            if (!_context.Lectores.Any())
+            {
+                _context.Lectores.AddRange(new List<Lector>
+                {
+                    new Lector { Carne = "123456",  Nombre = "Fernando Quiquivix", Telefono = "55443322", Direccion = "Mazatenango", CargoId = 1, SexoId = 1 },
+                    new Lector { Carne = "46657", Nombre = "Fredy Alcacer", Telefono = "22113322", Direccion = "Quetzaltenango", CargoId = 1, SexoId = 1 }                    
+                });
+
+                _context.SaveChanges();
+            }
+
+
+            if (!_context.StatusLibros.Any())
+            {
+                _context.StatusLibros.AddRange(new List<StatusLibro>
+                {
+                    new StatusLibro { Nombre = "Prestado" },
+                    new StatusLibro { Nombre = "Devuelto" }
                 });
 
                 _context.SaveChanges();

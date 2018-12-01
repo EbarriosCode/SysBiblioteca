@@ -1,0 +1,49 @@
+﻿@{
+    ViewData["Title"] = "Prestamo";
+}
+<br />
+<h1 class="text-center">Prestamo de Libros</h1>
+<hr />
+
+@if (TempData["created"] != null)
+{
+    <div class="alert alert-success alert-dismissible fade in col-md-6 col-md-offset-3 text-center">
+        <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+        <strong>@TempData["created"]</strong> Para realizar una devolución de libro vaya a devoluciones y podrá ver el listado de prestamos realizados.
+    </div>
+}
+
+<div class="row">
+    <div class="col-md-6 col-md-offset-3 form-inline">
+        <label>Búsqueda</label>
+        <div class="form-group">
+            <input type="text" id="Search" size="35" maxlength="30" class="form-control" placeholder="Titulo del Libro, o Descripción">
+        </div>
+        <button type="button" onclick="searchAjax()" class="btn btn-default"><i class="glyphicon glyphicon-search"></i></button>
+    </div>
+</div>
+
+<div id="dvResponse">
+</div>
+
+<script>
+
+    function searchAjax() {
+        var Search = $("#Search").val();
+
+        $("#dvResponse").empty();
+
+        $.ajax({
+            cache: false,
+            dataType: 'text',
+            type: "GET",
+            url: "/Prestamos/BusquedaLibros?Search=" + Search,
+            error: function (xhr, ajaxOptions, thrownError) {
+                alert('Failed');
+            }
+        }).done(function (response) {
+            $("#dvResponse").append(response);
+        });
+    }
+</script>
+

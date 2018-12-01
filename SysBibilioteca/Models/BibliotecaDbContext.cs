@@ -22,5 +22,8 @@ namespace SysBibilioteca.Models
         public DbSet<Cargo> Cargos { get; set; }
         public DbSet<Sexo> Sexos { get; set; }
         public DbSet<Lector> Lectores { get; set; }
+        public DbSet<Prestamo> Prestamos { get; set; }
+        public DbSet<Devolucion> Devoluciones { get; set; }
+        public DbSet<StatusLibro> StatusLibros { get; set; }
     }
 }

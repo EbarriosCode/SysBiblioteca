@@ -23,5 +23,7 @@ namespace SysBibilioteca.Models
 
         public int SexoId { get; set; }
         public Sexo Sexo { get; set; }
+
+        public IEnumerable<Prestamo> Prestamos { get; set; }
     }
 }
